@@ -34,15 +34,4 @@ public class Attachment extends AbstractEntity {
     @Column(nullable = false, length = 50)
     private String extension;
 
-    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "amka_file_id", unique = true)
-    private Attachment amkafile;
-
-    public void addAmkaFile(Attachment attachment) {
-        this.amkafile = attachment;
-    }
-
-    public void removeAmkaFile() {
-        this.amkafile = null;
-    }
 }
