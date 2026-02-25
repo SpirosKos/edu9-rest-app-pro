@@ -2,6 +2,7 @@ package gr.aueb.cf.eduapp.service;
 
 import gr.aueb.cf.eduapp.core.exception.EntityAlreadyExistsException;
 import gr.aueb.cf.eduapp.core.exception.EntityInvalidArgumentException;
+import gr.aueb.cf.eduapp.core.exception.EntityNotFoundException;
 import gr.aueb.cf.eduapp.dto.UserInsertDTO;
 import gr.aueb.cf.eduapp.dto.UserReadOnlyDTO;
 import gr.aueb.cf.eduapp.mapper.Mapper;
@@ -59,7 +60,16 @@ public class UserService implements IUserService{
     }
 
     @Override
-    public UserReadOnlyDTO getUserByUUIDDeletedFalse(UUID uuid) {
-        return null;
+    public UserReadOnlyDTO getUserByUUIDDeletedFalse(UUID uuid) throws EntityNotFoundException {
+        try {
+            User user = userRepository.findByUuidAndDeletedFalse(uuid)
+                    .orElseThrow(() -> new EntityNotFoundException("User", "User with uuid=" + uuid + " not found"));
+
+            log.debug("Active user with uuid={} found successfully", uuid);
+            return mapper.mapToUserReadOnlyDTO(user);
+        } catch (EntityNotFoundException e) {
+            log.error("Get failed. Active user with uuid={} not found", uuid);
+            throw e;
+        }
     }
 }
