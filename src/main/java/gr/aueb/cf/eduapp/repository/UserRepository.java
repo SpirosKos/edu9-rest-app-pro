@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import java.util.Optional;
 import java.util.UUID;
 
-public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificationExecutor<User> {
+public interface UserRepository extends JpaRepository<User, Long>,
+        JpaSpecificationExecutor<User> {
 
-    Optional<User> findByUUID(UUID uuid);
+    Optional<User> findByUuid(UUID uuid);
 
     @EntityGraph(attributePaths = {"role", "role.capabilities"})
     Optional<User> findByUsername(String username);
 
     Optional<User> findByUuidAndDeletedFalse(UUID uuid);
-
     Optional<User> findByUsernameAndDeletedFalse(String username);
 }
