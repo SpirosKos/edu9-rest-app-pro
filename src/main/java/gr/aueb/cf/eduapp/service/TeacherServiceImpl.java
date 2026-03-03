@@ -85,11 +85,11 @@ public class TeacherServiceImpl implements ITeacherService {
             Region region = regionRepository.findById(dto.regionId())
                     .orElseThrow(() -> new EntityInvalidArgumentException("Region", "Region id=" + dto.regionId() + " invalid"));
 
-            final Long teacherRole = 3L;    // Πάντα ο ρόλος είναι teacher - TODO να αλλάξει το DTO
+            final Long teacherRoleId = 3L;    // Πάντα ο ρόλος είναι teacher - TODO να αλλάξει το DTO
 //            Role role = roleRepository.findById(dto.userInsertDTO().roleId())
 //                    .orElseThrow(() -> new EntityInvalidArgumentException("Role","Role id=" + dto.userInsertDTO().roleId() + " invalid"));
-            Role role = roleRepository.findById(teacherRole)
-                    .orElseThrow(() -> new EntityInvalidArgumentException("Role","Role id=" + teacherRole + " invalid"));
+            Role role = roleRepository.findById(teacherRoleId)
+                    .orElseThrow(() -> new EntityInvalidArgumentException("Role","Role id=" + teacherRoleId + " invalid"));
 
             Teacher teacher = mapper.mapToTeacherEntity(dto);
 //            User user = mapper.mapToUserEntity(dto.userInsertDTO());
@@ -261,7 +261,7 @@ public class TeacherServiceImpl implements ITeacherService {
             Path filePath = Paths.get(uploadDirectory + savedName);
 
             Files.createDirectories(filePath.getParent());
-    //        Files.write(filePath, amkaFile.getBytes());
+            //        Files.write(filePath, amkaFile.getBytes());
             amkaFile.transferTo(filePath);  // safe for large files, more efficient
 
             Attachment attachment = new Attachment();
@@ -280,10 +280,10 @@ public class TeacherServiceImpl implements ITeacherService {
 
             PersonalInfo personalInfo = teacher.getPersonalInfo();
 
-//            if (personalInfo.getAmkaFile() != null) {
-//                Files.deleteIfExists(Path.of(personalInfo.getAmkaFile().getFilePath()));
-//                personalInfo.removeAmkaFile();  // orphanRemoval handles DB deletion
-//            }
+            if (personalInfo.getAmkaFile() != null) {
+                Files.deleteIfExists(Path.of(personalInfo.getAmkaFile().getFilePath()));
+                personalInfo.removeAmkaFile();  // orphanRemoval handles DB deletion
+            }
 
             personalInfo.addAmkaFile(attachment);
             teacherRepository.save(teacher);
@@ -307,7 +307,7 @@ public class TeacherServiceImpl implements ITeacherService {
 //        Path filePath = Paths.get(uploadDirectory + savedName);
 //
 //        Files.createDirectories(filePath.getParent());
-////        Files.write(filePath, amkaFile.getBytes());
+    ////        Files.write(filePath, amkaFile.getBytes());
 //        amkaFile.transferTo(filePath);  // safe for large files, more efficient
 //
 //        Attachment attachment = new Attachment();

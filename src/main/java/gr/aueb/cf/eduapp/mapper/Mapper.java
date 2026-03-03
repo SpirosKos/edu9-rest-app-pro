@@ -47,30 +47,4 @@ public class Mapper {
         return teacher;
     }
 
-
-//    public Teacher mapToTeacherEntity(TeacherUpdateDTO dto) {
-//        Teacher teacher = new Teacher();
-//        teacher.setUuid(dto.uuid());
-//        teacher.setFirstname(dto.firstname());
-//        teacher.setLastname(dto.lastname());
-//        teacher.setVat(dto.vat());
-//
-//        UserUpdateDTO userDTO = dto.userUpdateDTO();
-//        User user = new User();
-//        user.setUsername(userDTO.username());
-//        user.setPassword(userDTO.password());
-//
-//        teacher.addUser(user);  // moved to mapper
-//
-//        PersonalInfoUpdateDTO personalInfoDTO = dto.personalInfoUpdateDTO();
-//        PersonalInfo personalInfo = new PersonalInfo();
-//        personalInfo.setAmka(personalInfoDTO.amka());
-//        personalInfo.setIdentityNumber(personalInfoDTO.identityNumber());
-//        personalInfo.setPlaceOfBirth(personalInfoDTO.placeOfBirth());
-//        personalInfo.setMunicipalityOfRegistration(personalInfoDTO
-//                .municipalityOfRegistration());
-//        teacher.setPersonalInfo(personalInfo);  // Set PersonalInfo entity to Teacher
-//
-//        return teacher;
-//    }
 }

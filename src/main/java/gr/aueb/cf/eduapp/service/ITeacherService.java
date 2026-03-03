@@ -35,7 +35,7 @@ public interface ITeacherService {
 
     Page<TeacherReadOnlyDTO> getPaginatedTeachers(Pageable pageable);
     Page<TeacherReadOnlyDTO> getPaginatedTeachersDeletedFalse(Pageable pageable);
-//    Page<TeacherReadOnlyDTO> getTeachersPaginatedFiltered(Pageable pageable, TeacherFilters filters)
+    //    Page<TeacherReadOnlyDTO> getTeachersPaginatedFiltered(Pageable pageable, TeacherFilters filters)
 //            throws EntityNotFoundException;
     boolean isTeacherExists(String uuid);
 }
