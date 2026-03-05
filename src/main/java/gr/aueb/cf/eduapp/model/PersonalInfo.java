@@ -12,13 +12,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @Table(name = "personal_information")
-public class PersonalInfo extends AbstractEntity{
+public class PersonalInfo extends AbstractEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String amka;
 
     @Column(name = "identity_number", unique = true, nullable = false)
@@ -32,13 +32,13 @@ public class PersonalInfo extends AbstractEntity{
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "amka_file_id", unique = true)
-    private Attachment amkafile;
+    private Attachment amkaFile;
 
     public void addAmkaFile(Attachment attachment) {
-        this.amkafile = attachment;
+        this.amkaFile = attachment;
     }
 
     public void removeAmkaFile() {
-        this.amkafile = null;
+        this.amkaFile = null;
     }
 }

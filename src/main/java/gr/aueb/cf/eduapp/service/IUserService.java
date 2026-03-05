@@ -9,9 +9,10 @@ import gr.aueb.cf.eduapp.dto.UserReadOnlyDTO;
 import java.util.UUID;
 
 public interface IUserService {
-    UserReadOnlyDTO saveUser(UserInsertDTO insertDTO)
+    UserReadOnlyDTO saveUser(UserInsertDTO userInsertDTO)
             throws EntityAlreadyExistsException, EntityInvalidArgumentException;
 
     UserReadOnlyDTO getUserByUUID(UUID uuid) throws EntityNotFoundException;
     UserReadOnlyDTO getUserByUUIDDeletedFalse(UUID uuid) throws EntityNotFoundException;
+    boolean isUserExists(String username);
 }
